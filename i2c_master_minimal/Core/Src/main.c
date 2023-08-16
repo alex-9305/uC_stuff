@@ -66,8 +66,10 @@ static void MX_I2C1_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-  uint8_t TX_Buffer[1]; // DATA to send
-  TX_Buffer[0] = 0xAB;
+  uint8_t TX_Buffer[3]; // DATA to send
+  TX_Buffer[0] = 0x10;
+  TX_Buffer[1] = 0x11;
+  TX_Buffer[2] = 0x12;
   uint16_t test_i2c_address = (0x0045 << 1);
   HAL_StatusTypeDef i2c_status = 0;
   /* USER CODE END 1 */
@@ -102,7 +104,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  i2c_status = HAL_I2C_Master_Transmit(&hi2c1, test_i2c_address, TX_Buffer, 1, 10); //Sending in Blocking mode
+	  i2c_status = HAL_I2C_Master_Transmit(&hi2c1, test_i2c_address, TX_Buffer, 3, 10); //Sending in Blocking mode
   }
   /* USER CODE END 3 */
 }
@@ -163,7 +165,15 @@ static void MX_I2C1_Init(void)
 {
 
   /* USER CODE BEGIN I2C1_Init 0 */
-
+//	RCC->APB1ENR |= (1<<21); // enable I2C CLOCK
+//	RCC->AHB1ENR |= (1<<1);  // Enable GPIOB CLOCK
+//	GPIOB->MODER |= (2<<16) | (2<<18); // open drain
+//	GPIOB->OTYPER |= (1<<8) | (1<<9);
+//	GPIOB->OSPEEDR |= (3<<16) | (3<<18);
+//	GPIOB->PUPDR |= (1<<16) | (1<<18);
+//	GPIOB->AFR[1] |= (4<<0) | (4<<4);
+//	I2C1->CR1 |= (1<<15);  // reset the I2C
+//	I2C1->CR1 &= ~(1<<15);  // Normal operation
   /* USER CODE END I2C1_Init 0 */
 
   /* USER CODE BEGIN I2C1_Init 1 */

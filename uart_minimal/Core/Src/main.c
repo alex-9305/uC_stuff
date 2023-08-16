@@ -66,8 +66,10 @@ static void MX_USART1_UART_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-	uint8_t uart_rx[0];
+	uint8_t uart_rx[3];
 	uart_rx[0] = 0xAA;
+	uart_rx[1] = 0xAB;
+	uart_rx[2] = 0xAC;
 
   /* USER CODE END 1 */
 
@@ -101,7 +103,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  HAL_UART_Transmit(&huart1, uart_rx, 8, 100);
+	  HAL_UART_Transmit(&huart1, uart_rx, 3, 100);
   }
   /* USER CODE END 3 */
 }
